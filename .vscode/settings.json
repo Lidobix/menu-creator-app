@@ -1,7 +1,108 @@
 {
+  "workbench.iconTheme": "vscode-icons",
+  "html.format.wrapAttributes": "force",
+  "diffEditor.wordWrap": "off",
+  "editor.wordWrap": "on",
+  "workbench.colorTheme": "One Monokai",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "git.confirmSync": false,
+  "git-graph.maxDepthOfRepoSearch": 2,
+  "html.hover.references": false,
+  "css.hover.references": false,
+  "scss.hover.references": false,
+  "less.hover.references": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html"],
+  "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit"
-  }
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "prettier.enable": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "editor.guides.indentation": false,
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  },
+  "editor.inlayHints.enabled": "off",
+  "blockman.n01LineHeight": 0,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "explorer.confirmDragAndDrop": false,
+  "json.maxItemsComputed": 10000,
+  "prettier.singleQuote": true,
+  "thunder-client.codeSnippetLanguage": "cs-httpclient",
+  "githubPullRequests.createOnPublishBranch": "never",
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+  "security.workspace.trust.untrustedFiles": "open",
+  "autoprefixer.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.autoSave": "afterDelay",
+  "git.autofetch": true,
+  "git.pruneOnFetch": true,
+  "js.updateImportsOnFileMove.enabled": "always",
+  "ts.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.empty.hint": "hidden",
+  "colorize.languages": [
+    "typescript",
+    "javascript",
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg"
+  ],
+  "vsicons.dontShowNewVersionMessage": true,
+  "mdb.mcp.server": "prompt",
+  "liveServer.settings.host": "0.0.0.0",
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.useLocalIp": true,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.https": {
+    "enable": true,
+    "cert": "C:\\Users\\33652\\localhost.pfx",
+    "key": "C:\\Users\\33652\\localhost.pfx",
+    "passphrase": "1234"
+  },
+  "fiveServer.config": {
+    "https": true,
+    "port": 5500,
+    "hostname": "0.0.0.0",
+    "open": false
+  },
+  "fiveServer.ignore": [],
+  "fiveServer.browser": [],
+  "redhat.telemetry.enabled": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "claudeCode.preferredLocation": "panel"
 }
