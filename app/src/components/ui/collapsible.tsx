@@ -6,7 +6,7 @@ import { IconSymbol } from '@src/components/ui/icon-symbol';
 import { Colors } from '@/src/constants/theme';
 import { useColorScheme } from '@/src/hooks/use-color-scheme';
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
+export const Collapsible = ({ children, title }: PropsWithChildren & { title: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useColorScheme() ?? 'light';
 
@@ -29,7 +29,7 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
       {isOpen && <ThemedView style={styles.content}>{children}</ThemedView>}
     </ThemedView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   heading: {
@@ -42,3 +42,4 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
 });
+export default Collapsible;

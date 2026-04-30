@@ -15,8 +15,12 @@ export default typescriptEslint.config(
   js.configs.recommended,
   ...typescriptEslint.configs.recommended,
   {
-    languageOptions: { globals: { ...globals.node } },
-
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.es2021,
+      },
+    },
     plugins: {
       'react-native': reactNative,
       'react-hooks': reactHooks,
@@ -27,9 +31,12 @@ export default typescriptEslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'prettier/prettier': 'error',
+
+      // Règle désactivée pour permettre les require() d'assets Expo sans commentaires
       '@typescript-eslint/no-require-imports': 'off',
+
       'simple-import-sort/imports': [
-        'error',
+        'warn',
         {
           groups: [
             [
@@ -49,6 +56,16 @@ export default typescriptEslint.config(
       'simple-import-sort/exports': 'error',
       'import/newline-after-import': ['error', { count: 1 }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+  },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
   configPrettier,
