@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import PressableIcon from '@components/PressableIcon';
@@ -10,33 +10,22 @@ import { Ingredient } from '@types';
 
 interface IngredientModalEditorProps {
   modalOpen: boolean;
-  closeModal: () => void;
+  toggleModal: () => void;
   selectedCategory: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  setPendingItems: React.Dispatch<React.SetStateAction<Ingredient[]>>;
-  setPendingEditId: React.Dispatch<React.SetStateAction<string | null>>;
-  setPendingEditName: React.Dispatch<React.SetStateAction<string>>;
-  query: string;
-  pendingItems: Ingredient[];
-  pendingEditId: string | null;
-  pendingEditName: string;
 }
 
 const IngredientModalEditor = ({
   modalOpen,
-  closeModal,
+  toggleModal,
   selectedCategory,
-  setQuery,
-  setPendingItems,
-  setPendingEditId,
-  setPendingEditName,
-  query,
-  pendingEditId,
-  pendingEditName,
-  pendingItems,
 }: IngredientModalEditorProps) => {
   const { categoryMap, addIngredients, allIngredients } = useIngredients();
   const inputRef = useRef<TextInput>(null);
+
+  const [query, setQuery] = useState('');
+  const [pendingItems, setPendingItems] = useState<Ingredient[]>([]);
+  const [pendingEditId, setPendingEditId] = useState<string | null>(null);
+  const [pendingEditName, setPendingEditName] = useState('');
 
   const currentList = categoryMap[selectedCategory] ?? [];
 
@@ -44,7 +33,14 @@ const IngredientModalEditor = ({
     if (pendingItems.length > 0) {
       addIngredients(selectedCategory, pendingItems);
     }
-    closeModal();
+    toggleModal();
+  };
+
+  const resetModalData = () => {
+    setQuery('');
+    setPendingItems([]);
+    setPendingEditId(null);
+    setPendingEditName('');
   };
 
   const filteredDropdown =
@@ -87,9 +83,14 @@ const IngredientModalEditor = ({
   };
 
   return (
-    <Modal visible={modalOpen} transparent animationType="fade" onRequestClose={closeModal}>
+    <Modal
+      visible={modalOpen}
+      transparent
+      animationType="fade"
+      onRequestClose={toggleModal}
+      onDismiss={resetModalData}>
       <View style={styles.modalOverlay}>
-        <Pressable style={StyleSheet.absoluteFillObject} onPress={closeModal} />
+        <Pressable style={StyleSheet.absoluteFillObject} onPress={toggleModal} />
 
         <View style={styles.dialog} onStartShouldSetResponder={() => true}>
           <View style={styles.dialogHeader}>
@@ -98,7 +99,7 @@ const IngredientModalEditor = ({
             </Text>
             <PressableIcon
               type={'close'}
-              onPress={closeModal}
+              onPress={toggleModal}
               hitSlop={8}
               color={COLORS.textMuted}
               iconSize={22}></PressableIcon>
@@ -200,7 +201,7 @@ const IngredientModalEditor = ({
           </ScrollView>
 
           <View style={styles.dialogFooter}>
-            <Pressable style={styles.cancelButton} onPress={closeModal}>
+            <Pressable style={styles.cancelButton} onPress={toggleModal}>
               <Text style={styles.cancelButtonText}>Annuler</Text>
             </Pressable>
             <Pressable

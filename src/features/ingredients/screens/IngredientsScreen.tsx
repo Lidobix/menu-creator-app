@@ -7,23 +7,15 @@ import IngredientModalEditor from '@ingredients/components/IngredientModalEditor
 import IngredientsList from '@ingredients/components/IngredientsList';
 import { useIngredients } from '@ingredients/contexts/IngredientsContext';
 import { CATEGORY_META, DEFAULT_META } from '@ingredients/data/categories';
-import { Ingredient } from '@types';
 
 export default function IngredientsScreen() {
   const { categoryMap, categoryNames, allIngredients } = useIngredients();
 
-  // Selected tab
   const [selectedCategory, setSelectedCategory] = useState<string>(() => categoryNames[0] ?? '');
 
-  // Inline row editing
   const [, setRowEditId] = useState<string | null>(null);
 
-  // Add modal
   const [modalOpen, setModalOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const [pendingItems, setPendingItems] = useState<Ingredient[]>([]);
-  const [pendingEditId, setPendingEditId] = useState<string | null>(null);
-  const [pendingEditName, setPendingEditName] = useState('');
 
   const selectorRowRef = useRef<View>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -42,17 +34,9 @@ export default function IngredientsScreen() {
     setDropdownOpen(false);
   };
 
-  const openModal = useCallback(() => {
-    setModalOpen(true);
-    setQuery('');
-    setPendingItems([]);
-    setPendingEditId(null);
-    setPendingEditName('');
-  }, [setModalOpen, setQuery, setPendingItems, setPendingEditId, setPendingEditName]);
-
-  const closeModal = useCallback(() => {
-    setModalOpen(false);
-  }, [setModalOpen]);
+  const toggleModal = useCallback(() => {
+    setModalOpen(!modalOpen);
+  }, [setModalOpen, modalOpen]);
 
   const activeIngredients = categoryMap[selectedCategory] ?? [];
   const activeMeta = CATEGORY_META[selectedCategory] ?? DEFAULT_META;
@@ -80,27 +64,21 @@ export default function IngredientsScreen() {
               color={COLORS.textSecondary}
             />
           </Pressable>
-          <Pressable style={styles.addButton} onPress={openModal} hitSlop={8}>
+          <Pressable style={styles.addButton} onPress={toggleModal} hitSlop={8}>
             <MaterialIcons name="add" size={18} color={COLORS.primary} />
             <Text style={styles.addButtonText}>Ajouter</Text>
           </Pressable>
         </View>
       </View>
 
-      <IngredientsList selectedCategory={selectedCategory} openModal={openModal}></IngredientsList>
+      <IngredientsList
+        selectedCategory={selectedCategory}
+        openModal={toggleModal}></IngredientsList>
 
       <IngredientModalEditor
         modalOpen={modalOpen}
-        closeModal={closeModal}
-        selectedCategory={selectedCategory}
-        setQuery={setQuery}
-        setPendingItems={setPendingItems}
-        setPendingEditId={setPendingEditId}
-        setPendingEditName={setPendingEditName}
-        pendingItems={pendingItems}
-        pendingEditId={pendingEditId}
-        pendingEditName={pendingEditName}
-        query={query}></IngredientModalEditor>
+        toggleModal={toggleModal}
+        selectedCategory={selectedCategory}></IngredientModalEditor>
 
       <Modal
         visible={dropdownOpen}
