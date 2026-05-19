@@ -3,7 +3,18 @@ import { Pressable, Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { COLORS, LAYOUT } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { IngredientRowProps } from '../types';
+import { Ingredient } from '@types';
+
+interface IngredientRowProps {
+  ingredient: Ingredient;
+  isEditing: boolean;
+  editName: string;
+  onStartEdit: () => void;
+  onEditChange: (v: string) => void;
+  onConfirmEdit: () => void;
+  onCancelEdit: () => void;
+  onDelete: () => void;
+}
 
 const IngredientRow = memo(function IngredientRow({
   ingredient,

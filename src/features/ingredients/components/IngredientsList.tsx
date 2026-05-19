@@ -10,23 +10,20 @@ import IngredientRow from './IngredientRow';
 
 interface EmptyListProps {
   icon: string;
+  openModal: () => void;
 }
 
 interface IngredientsListProps {
   selectedCategory: string;
+  openModal: () => void;
 }
 
-const EmptyList = ({ icon }: EmptyListProps) => {
+const EmptyList = ({ icon, openModal }: EmptyListProps) => {
   return (
     <View style={styles.emptyState}>
       <Text style={styles.emptyEmoji}>{icon}</Text>
       <Text style={styles.emptyText}>Aucun ingrédient dans cette catégorie</Text>
-      <Pressable
-        style={styles.emptyAdd}
-        // onPress={
-        //   openModal
-        // }
-      >
+      <Pressable style={styles.emptyAdd} onPress={openModal}>
         <MaterialIcons name="add-circle-outline" size={16} color={COLORS.primary} />
         <Text style={styles.emptyAddText}>Ajouter un ingrédient</Text>
       </Pressable>
@@ -34,7 +31,7 @@ const EmptyList = ({ icon }: EmptyListProps) => {
   );
 };
 
-const IngredientsList = ({ selectedCategory }: IngredientsListProps) => {
+const IngredientsList = ({ selectedCategory, openModal }: IngredientsListProps) => {
   const { removeIngredient, updateIngredient, categoryMap } = useIngredients();
 
   const [rowEditId, setRowEditId] = useState<string | null>(null);
@@ -56,7 +53,7 @@ const IngredientsList = ({ selectedCategory }: IngredientsListProps) => {
   return (
     <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
       {activeIngredients.length === 0 ? (
-        <EmptyList icon={activeMeta.emoji}></EmptyList>
+        <EmptyList icon={activeMeta.emoji} openModal={openModal}></EmptyList>
       ) : (
         activeIngredients.map(ing => (
           <IngredientRow
