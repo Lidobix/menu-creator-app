@@ -1,1 +1,1 @@
-export { default } from '@features/menu-editor/screens/PizzaIngredientsScreen';
+export { default } from '@features/pizzaEditor/screens/PizzaIngredientsScreen';

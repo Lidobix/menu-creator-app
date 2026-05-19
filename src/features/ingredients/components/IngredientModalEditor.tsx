@@ -4,9 +4,9 @@ import { StyleSheet } from 'react-native';
 import PressableIcon from '@components/PressableIcon';
 import { COLORS, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import PendingItem from '@ingredients/components/PendingItem';
+import { useIngredients } from '@ingredients/contexts/IngredientsContext';
 import { Ingredient } from '@types';
-import { useIngredients } from '../contexts/IngredientsContext';
-import PendingItem from './PendingItem';
 
 interface IngredientModalEditorProps {
   modalOpen: boolean;

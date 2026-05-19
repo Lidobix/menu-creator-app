@@ -1,8 +1,8 @@
 import 'react-native-reanimated';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { IngredientsProvider } from '@features/ingredients/contexts/IngredientsContext';
-import { PizzaCreationProvider } from '@features/menu-editor/contexts/PizzaCreationContext';
 import { MenuProvider } from '@features/menus/contexts/MenuContext';
+import { PizzaCreationProvider } from '@features/pizzaEditor/contexts/PizzaCreationContext';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import useColorScheme from '../src/hooks/use-color-scheme';

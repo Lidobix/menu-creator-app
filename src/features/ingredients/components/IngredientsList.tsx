@@ -3,10 +3,10 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { COLORS, LAYOUT } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import IngredientRow from '@ingredients/components/IngredientRow';
+import { useIngredients } from '@ingredients/contexts/IngredientsContext';
+import { CATEGORY_META, DEFAULT_META } from '@ingredients/data/categories';
 import { Ingredient } from '@types';
-import { useIngredients } from '../contexts/IngredientsContext';
-import { CATEGORY_META, DEFAULT_META } from '../data/categories';
-import IngredientRow from './IngredientRow';
 
 interface EmptyListProps {
   icon: string;

@@ -1,1 +1,1 @@
-export { default } from '@features/menu-editor/screens/SummaryScreen';
+export { default } from '@features/pizzaEditor/screens/SummaryScreen';

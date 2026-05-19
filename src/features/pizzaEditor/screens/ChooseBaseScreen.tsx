@@ -3,8 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
-import { PIZZA_CATEGORIES } from '@features/menu-editor/data/categories';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
+import { PIZZA_CATEGORIES } from '@features/pizzaEditor/data/categories';
 import type { PizzaBase } from '@types';
 import { useRouter } from 'expo-router';
 

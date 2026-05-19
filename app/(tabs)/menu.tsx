@@ -2,10 +2,10 @@ import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { COLORS, LAYOUT } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { PizzaCard } from '@features/menu-editor/components/PizzaCard';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
-import { PIZZA_CATEGORIES } from '@features/menu-editor/data/categories';
 import { useMenu } from '@features/menus/contexts/MenuContext';
+import { PizzaCard } from '@features/pizzaEditor/components/PizzaCard';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
+import { PIZZA_CATEGORIES } from '@features/pizzaEditor/data/categories';
 import { Pizza } from '@types';
 import { useRouter } from 'expo-router';
 

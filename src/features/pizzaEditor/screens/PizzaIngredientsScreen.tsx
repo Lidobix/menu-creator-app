@@ -4,7 +4,7 @@ import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useIngredients } from '@features/ingredients/contexts/IngredientsContext';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
 import type { Ingredient } from '@types';
 import { useRouter } from 'expo-router';
 

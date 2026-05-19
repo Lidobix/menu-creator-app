@@ -12,7 +12,7 @@ import {
 import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
 import { useRouter } from 'expo-router';
 
 export default function CreatePizzaNameScreen() {

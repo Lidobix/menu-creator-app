@@ -3,8 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
 import { useMenu } from '@features/menus/contexts/MenuContext';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
 import { useRouter } from 'expo-router';
 
 export default function SummaryScreen() {

@@ -3,11 +3,11 @@ import { Modal, Pressable, Text, View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import IngredientModalEditor from '@ingredients/components/IngredientModalEditor';
+import IngredientsList from '@ingredients/components/IngredientsList';
+import { useIngredients } from '@ingredients/contexts/IngredientsContext';
+import { CATEGORY_META, DEFAULT_META } from '@ingredients/data/categories';
 import { Ingredient } from '@types';
-import IngredientModalEditor from '../components/IngredientModalEdirtor';
-import IngredientsList from '../components/IngredientsList';
-import { useIngredients } from '../contexts/IngredientsContext';
-import { CATEGORY_META, DEFAULT_META } from '../data/categories';
 
 export default function IngredientsScreen() {
   const { categoryMap, categoryNames, allIngredients } = useIngredients();

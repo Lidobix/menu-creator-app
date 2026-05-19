@@ -4,8 +4,9 @@
     "strict": true,
     "paths": {
       "@/*": ["./app/*"],
-      // "@src/*": ["./src/*"],
       "@features/*": ["./src/features/*"],
+      "@ingredients/*": ["./src/features/ingredients/*"],
+      "@pizzaEditor/*": ["./src/features/pizzaEditor/*"],
       "@components/*": ["./src/components/*"],
       "@types": ["./src/types/types.ts"],
       "@assets/*": ["./assets/*"],
