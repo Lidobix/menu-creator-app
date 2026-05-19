@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ingredient } from '@types';
@@ -95,14 +96,18 @@ const IngredientModalEditor = ({
             <Text style={styles.dialogTitle} numberOfLines={1}>
               Ajouter à <Text style={styles.dialogTitleCategory}>"{selectedCategory}"</Text>
             </Text>
-            <Pressable onPress={closeModal} hitSlop={8}>
-              <MaterialIcons name="close" size={22} color={COLORS.textMuted} />
-            </Pressable>
+            <PressableIcon
+              type={'close'}
+              onPress={closeModal}
+              hitSlop={8}
+              color={COLORS.textMuted}
+              iconSize={22}></PressableIcon>
           </View>
 
           <ScrollView style={styles.dialogBody} keyboardShouldPersistTaps="handled">
             <View style={styles.searchBar}>
               <MaterialIcons name="search" size={18} color={COLORS.textMuted} />
+
               <TextInput
                 ref={inputRef}
                 style={styles.searchInput}
@@ -115,9 +120,12 @@ const IngredientModalEditor = ({
                 autoFocus
               />
               {query.length > 0 && (
-                <Pressable onPress={() => setQuery('')} hitSlop={8}>
-                  <MaterialIcons name="close" size={16} color={COLORS.textMuted} />
-                </Pressable>
+                <PressableIcon
+                  type={'close'}
+                  onPress={() => setQuery('')}
+                  hitSlop={8}
+                  color={COLORS.textMuted}
+                  iconSize={16}></PressableIcon>
               )}
             </View>
 

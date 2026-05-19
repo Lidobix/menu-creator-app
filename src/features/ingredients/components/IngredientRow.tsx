@@ -1,9 +1,8 @@
 import { memo } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
-import EditButton from '@components/EditIcon';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT } from '@config';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ingredient } from '@types';
 
 interface IngredientRowProps {
@@ -39,25 +38,38 @@ const IngredientRow = memo(function IngredientRow({
             autoFocus
             returnKeyType="done"
           />
-          <Pressable style={styles.rowAction} onPress={onConfirmEdit} hitSlop={8}>
-            <MaterialIcons name="check" size={20} color={COLORS.success} />
-          </Pressable>
-          <Pressable style={styles.rowAction} onPress={onCancelEdit} hitSlop={8}>
-            <MaterialIcons name="close" size={20} color={COLORS.textMuted} />
-          </Pressable>
+          <PressableIcon
+            type={'check'}
+            containerStyle={styles.rowAction}
+            onPress={onConfirmEdit}
+            iconSize={20}
+            hitSlop={8}
+            color={COLORS.success}></PressableIcon>
+          <PressableIcon
+            type={'close'}
+            containerStyle={styles.rowAction}
+            onPress={onCancelEdit}
+            iconSize={20}
+            hitSlop={8}
+            color={COLORS.textMuted}></PressableIcon>
         </>
       ) : (
         <>
           <Text style={styles.rowName}>{ingredient.name}</Text>
-          <EditButton
+          <PressableIcon
+            type={'edit'}
             containerStyle={styles.rowAction}
             onPress={onStartEdit}
             iconSize={18}
             hitSlop={8}
-            color={COLORS.textMuted}></EditButton>
-          <Pressable style={styles.rowAction} onPress={onDelete} hitSlop={8}>
-            <MaterialIcons name="delete-outline" size={18} color={COLORS.textMuted} />
-          </Pressable>
+            color={COLORS.textMuted}></PressableIcon>
+          <PressableIcon
+            type={'delete-outline'}
+            containerStyle={styles.rowAction}
+            onPress={onDelete}
+            iconSize={18}
+            hitSlop={8}
+            color={COLORS.textMuted}></PressableIcon>
         </>
       )}
     </View>

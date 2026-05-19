@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import type { Ingredient } from '@types';
 import { ALL_INGREDIENTS } from '../data/ingredients';
-import type { Ingredient } from '../types';
 
 type CategoryMap = Record<string, Ingredient[]>;
 

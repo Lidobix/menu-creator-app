@@ -1,9 +1,8 @@
 import { memo } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
-import EditButton from '@components/EditIcon';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS } from '@config';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ingredient } from '@types';
 
 interface PendingItemProps {
@@ -37,26 +36,35 @@ const PendingItem = memo(function PendingItem({
             autoFocus
             returnKeyType="done"
           />
-          <Pressable style={styles.pendingAction} onPress={onConfirmEdit} hitSlop={6}>
-            <MaterialIcons name="check" size={18} color={COLORS.success} />
-          </Pressable>
+          <PressableIcon
+            type={'check'}
+            onPress={onConfirmEdit}
+            hitSlop={6}
+            color={COLORS.textMuted}
+            containerStyle={styles.pendingAction}
+            iconSize={18}></PressableIcon>
         </>
       ) : (
         <>
           <Text style={styles.pendingItemName} numberOfLines={1}>
             {item.name}
           </Text>
-          <EditButton
+          <PressableIcon
+            type={'edit'}
             containerStyle={styles.pendingAction}
             onPress={onStartEdit}
             hitSlop={6}
             color={COLORS.textMuted}
-            iconSize={16}></EditButton>
+            iconSize={16}></PressableIcon>
         </>
       )}
-      <Pressable style={styles.pendingAction} onPress={onDelete} hitSlop={6}>
-        <MaterialIcons name="close" size={16} color={COLORS.textMuted} />
-      </Pressable>
+      <PressableIcon
+        type={'close'}
+        containerStyle={styles.pendingAction}
+        onPress={onDelete}
+        hitSlop={6}
+        color={COLORS.textMuted}
+        iconSize={16}></PressableIcon>
     </View>
   );
 });

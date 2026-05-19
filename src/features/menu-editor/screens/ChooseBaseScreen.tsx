@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
@@ -19,9 +20,14 @@ export default function ChooseBaseScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.topBar}>
-        <Pressable style={styles.backButton} onPress={() => back()} hitSlop={8}>
-          <MaterialIcons name="arrow-back" size={22} color={COLORS.textSecondary} />
-        </Pressable>
+        <PressableIcon
+          type={'arrow-back'}
+          onPress={() => back()}
+          hitSlop={8}
+          color={COLORS.textSecondary}
+          containerStyle={styles.backButton}
+          iconSize={22}></PressableIcon>
+
         <View style={styles.steps}>
           <View style={[styles.step, styles.stepDone]} />
           <View style={[styles.step, styles.stepActive]} />

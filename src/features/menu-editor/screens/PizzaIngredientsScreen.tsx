@@ -1,5 +1,6 @@
 import React, { memo, useRef, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useIngredients } from '@features/ingredients/contexts/IngredientsContext';
@@ -60,9 +61,14 @@ export default function PizzaIngredientsScreen() {
     <View style={styles.root}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.topBar}>
-          <Pressable style={styles.backButton} onPress={back} hitSlop={8}>
-            <MaterialIcons name="arrow-back" size={22} color={COLORS.textSecondary} />
-          </Pressable>
+          <PressableIcon
+            type={'arrow-back'}
+            onPress={back}
+            hitSlop={8}
+            color={COLORS.textSecondary}
+            containerStyle={styles.backButton}
+            iconSize={22}></PressableIcon>
+
           <View style={styles.steps}>
             <View style={[styles.step, styles.stepDone]} />
             <View style={[styles.step, styles.stepDone]} />
@@ -90,9 +96,12 @@ export default function PizzaIngredientsScreen() {
               returnKeyType="search"
             />
             {query.length > 0 ? (
-              <Pressable onPress={() => setQuery('')} hitSlop={8}>
-                <MaterialIcons name="close" size={18} color={COLORS.textMuted} />
-              </Pressable>
+              <PressableIcon
+                type={'close'}
+                onPress={() => setQuery('')}
+                hitSlop={8}
+                color={COLORS.textMuted}
+                iconSize={18}></PressableIcon>
             ) : null}
           </View>
 
@@ -136,9 +145,13 @@ export default function PizzaIngredientsScreen() {
               {pizza.ingredients.map(ing => (
                 <View key={ing.id} style={styles.chip}>
                   <Text style={styles.chipText}>{ing.name}</Text>
-                  <Pressable onPress={() => removeIngredient(ing.id)} hitSlop={6}>
-                    <MaterialIcons name="close" size={16} color={COLORS.textSecondary} />
-                  </Pressable>
+
+                  <PressableIcon
+                    type={'close'}
+                    onPress={() => removeIngredient(ing.id)}
+                    hitSlop={6}
+                    color={COLORS.textSecondary}
+                    iconSize={16}></PressableIcon>
                 </View>
               ))}
             </View>
