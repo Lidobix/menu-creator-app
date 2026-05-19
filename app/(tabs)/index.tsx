@@ -1,94 +1,158 @@
-import { Platform, StyleSheet } from 'react-native';
-import { HelloWave } from '@src/components/hello-wave';
-import ParallaxScrollView from '@src/components/parallax-scroll-view';
-import { ThemedText } from '@src/components/themed-text';
-import { ThemedView } from '@src/components/themed-view';
-import { Image } from 'expo-image';
-import { Link } from 'expo-router';
+import React from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { COLORS, LAYOUT, SHADOWS } from '@config';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useMenu } from '@features/menus/contexts/MenuContext';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image source={require('@assets/images/partial-react-logo.png')} style={styles.reactLogo} />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const { push, navigate } = useRouter();
+  const { menu } = useMenu();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const handleCreatePizza = () => {
+    if (typeof document !== 'undefined') {
+      (document.activeElement as HTMLElement)?.blur();
+    }
+    push('/create-pizza');
+  };
+
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <View style={styles.hero}>
+        <Text style={styles.heroEmoji}>🍕</Text>
+        <Text style={styles.heroTitle}>Menu Creator</Text>
+        <Text style={styles.heroSubtitle}>Créez et gérez le menu de votre pizzeria</Text>
+      </View>
+
+      <Pressable style={styles.createButton} onPress={handleCreatePizza}>
+        <MaterialIcons name="add-circle" size={22} color="#fff" />
+        <Text style={styles.createButtonText}>Créer une pizza</Text>
+      </Pressable>
+
+      <Pressable style={styles.menuCard} onPress={() => navigate('/(tabs)/menu')}>
+        <View>
+          <Text style={styles.menuCardCount}>{menu.length}</Text>
+          <Text style={styles.menuCardLabel}>
+            {menu.length === 0
+              ? 'Aucune pizza au menu'
+              : menu.length === 1
+                ? 'Pizza au menu'
+                : 'Pizzas au menu'}
+          </Text>
+        </View>
+        <View style={styles.menuCardLink}>
+          <Text style={styles.menuCardLinkText}>Voir le menu</Text>
+          <MaterialIcons name="chevron-right" size={20} color={COLORS.primary} />
+        </View>
+      </Pressable>
+
+      {menu.length === 0 && (
+        <View style={styles.tip}>
+          <MaterialIcons name="lightbulb-outline" size={18} color={COLORS.warning} />
+          <Text style={styles.tipText}>
+            Commencez par créer votre première pizza en cliquant sur le bouton ci-dessus !
+          </Text>
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
   },
-  stepContainer: {
+  content: {
+    padding: LAYOUT.contentPadding,
+    paddingTop: 56,
+    maxWidth: LAYOUT.contentMaxWidth,
+    width: '100%',
+    alignSelf: 'center',
+    gap: 20,
+  },
+  hero: {
+    alignItems: 'center',
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  heroEmoji: {
+    fontSize: 64,
+    marginBottom: 4,
+  },
+  heroTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: COLORS.textPrimary,
+    letterSpacing: -0.5,
+  },
+  heroSubtitle: {
+    fontSize: 15,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  createButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 16,
+    paddingVertical: 18,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    boxShadow: SHADOWS.primaryBtn,
+  },
+  createButtonText: {
+    color: COLORS.surface,
+    fontSize: 17,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+  },
+  menuCard: {
+    backgroundColor: COLORS.surface,
+    borderRadius: 16,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    boxShadow: SHADOWS.md,
+  },
+  menuCardCount: {
+    fontSize: 36,
+    fontWeight: '800',
+    color: COLORS.primary,
+    lineHeight: 40,
+  },
+  menuCardLabel: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    marginTop: 2,
+  },
+  menuCardLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  menuCardLinkText: {
+    fontSize: 14,
+    color: COLORS.primary,
+    fontWeight: '600',
+  },
+  tip: {
+    backgroundColor: COLORS.warningBg,
+    borderRadius: 12,
+    padding: 16,
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'flex-start',
+    borderLeftWidth: 3,
+    borderLeftColor: COLORS.warningBorder,
+  },
+  tipText: {
+    flex: 1,
+    fontSize: 13,
+    color: COLORS.warningText,
+    lineHeight: 20,
   },
 });
