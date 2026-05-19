@@ -105,7 +105,7 @@ const IngredientModalEditor = ({
               iconSize={22}></PressableIcon>
           </View>
 
-          <ScrollView style={styles.dialogBody} keyboardShouldPersistTaps="handled">
+          <View style={styles.dialogBody}>
             <View style={styles.searchBar}>
               <MaterialIcons name="search" size={18} color={COLORS.textMuted} />
 
@@ -126,12 +126,16 @@ const IngredientModalEditor = ({
                   onPress={() => setQuery('')}
                   hitSlop={8}
                   color={COLORS.textMuted}
-                  iconSize={16}></PressableIcon>
+                  iconSize={16}
+                />
               )}
             </View>
 
             {filteredDropdown.length > 0 && (
-              <View style={styles.dropdown}>
+              <ScrollView
+                style={styles.dropdown}
+                keyboardShouldPersistTaps="handled"
+                nestedScrollEnabled>
                 {filteredDropdown.map((ing, idx) => (
                   <Pressable
                     key={ing.id}
@@ -158,7 +162,7 @@ const IngredientModalEditor = ({
                     )}
                   </Pressable>
                 ))}
-              </View>
+              </ScrollView>
             )}
 
             {canCreate && (
@@ -173,32 +177,34 @@ const IngredientModalEditor = ({
             {pendingItems.length > 0 && (
               <View style={styles.pendingSection}>
                 <Text style={styles.pendingLabel}>À ajouter ({pendingItems.length})</Text>
-                {pendingItems.map(item => (
-                  <PendingItem
-                    key={item.id}
-                    item={item}
-                    isEditing={pendingEditId === item.id}
-                    editingName={pendingEditName}
-                    onStartEdit={() => {
-                      setPendingEditId(item.id);
-                      setPendingEditName(item.name);
-                    }}
-                    onEditChange={setPendingEditName}
-                    onConfirmEdit={() => {
-                      if (!pendingEditName.trim()) return;
-                      setPendingItems(prev =>
-                        prev.map(i =>
-                          i.id === item.id ? { ...i, name: pendingEditName.trim() } : i,
-                        ),
-                      );
-                      setPendingEditId(null);
-                    }}
-                    onDelete={() => setPendingItems(prev => prev.filter(i => i.id !== item.id))}
-                  />
-                ))}
+                <ScrollView keyboardShouldPersistTaps="handled" nestedScrollEnabled>
+                  {pendingItems.map(item => (
+                    <PendingItem
+                      key={item.id}
+                      item={item}
+                      isEditing={pendingEditId === item.id}
+                      editingName={pendingEditName}
+                      onStartEdit={() => {
+                        setPendingEditId(item.id);
+                        setPendingEditName(item.name);
+                      }}
+                      onEditChange={setPendingEditName}
+                      onConfirmEdit={() => {
+                        if (!pendingEditName.trim()) return;
+                        setPendingItems(prev =>
+                          prev.map(i =>
+                            i.id === item.id ? { ...i, name: pendingEditName.trim() } : i,
+                          ),
+                        );
+                        setPendingEditId(null);
+                      }}
+                      onDelete={() => setPendingItems(prev => prev.filter(i => i.id !== item.id))}
+                    />
+                  ))}
+                </ScrollView>
               </View>
             )}
-          </ScrollView>
+          </View>
 
           <View style={styles.dialogFooter}>
             <Pressable style={styles.cancelButton} onPress={toggleModal}>
@@ -238,7 +244,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: '90%',
     maxWidth: 480,
-    maxHeight: '85%',
+    height: '72%',
     overflow: 'hidden',
     boxShadow: SHADOWS.lg,
   },
@@ -263,6 +269,7 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   dialogBody: {
+    flex: 1,
     paddingHorizontal: 24,
     paddingTop: 16,
   },
@@ -291,6 +298,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     overflow: 'hidden',
     marginBottom: 8,
+    maxHeight: 200,
     boxShadow: SHADOWS.sm,
   },
   dropdownItem: {
@@ -343,6 +351,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   pendingSection: {
+    flex: 1,
     gap: 4,
     paddingTop: 8,
     paddingBottom: 16,
