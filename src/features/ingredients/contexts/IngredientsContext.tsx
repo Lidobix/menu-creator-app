@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
-import { ALL_INGREDIENTS } from '../data/ingredients';
-import type { Ingredient } from '../types';
+import { CATEGORIES } from '@ingredients/data/categories';
+import { ALL_INGREDIENTS } from '@ingredients/data/ingredients';
+import type { Ingredient } from '@types';
 
 type CategoryMap = Record<string, Ingredient[]>;
 
@@ -12,8 +13,6 @@ interface IngredientsContextValue {
   removeIngredient: (category: string, id: string) => void;
   updateIngredient: (category: string, id: string, name: string) => void;
 }
-
-const CATEGORY_ORDER = ['Fromages', 'Viandes', 'Poissons', 'Légumes', 'Herbes', 'Autres'];
 
 function buildInitialMap(): CategoryMap {
   const map: CategoryMap = {};
@@ -32,8 +31,8 @@ export function IngredientsProvider({ children }: { children: React.ReactNode })
   const categoryNames = useMemo(() => {
     const all = Object.keys(categoryMap);
     return [
-      ...CATEGORY_ORDER.filter(c => all.includes(c)),
-      ...all.filter(c => !CATEGORY_ORDER.includes(c)),
+      ...CATEGORIES.map(c => c.label).filter(c => all.includes(c)),
+      ...all.filter(c => !CATEGORIES.some(cat => cat.label === c)),
     ];
   }, [categoryMap]);
 

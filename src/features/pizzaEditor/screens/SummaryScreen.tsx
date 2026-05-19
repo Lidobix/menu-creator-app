@@ -1,9 +1,10 @@
 import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import PressableIcon from '@components/PressableIcon';
 import { COLORS, LAYOUT, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { usePizzaCreation } from '@features/menu-editor/contexts/PizzaCreationContext';
 import { useMenu } from '@features/menus/contexts/MenuContext';
+import { usePizzaCreation } from '@features/pizzaEditor/contexts/PizzaCreationContext';
 import { useRouter } from 'expo-router';
 
 export default function SummaryScreen() {
@@ -34,9 +35,13 @@ export default function SummaryScreen() {
     <View style={styles.root}>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <View style={styles.topBar}>
-          <Pressable style={styles.backButton} onPress={back} hitSlop={8}>
-            <MaterialIcons name="arrow-back" size={22} color={COLORS.textSecondary} />
-          </Pressable>
+          <PressableIcon
+            type={'arrow-back'}
+            onPress={back}
+            hitSlop={8}
+            color={COLORS.textMuted}
+            iconSize={22}></PressableIcon>
+
           <View style={styles.steps}>
             <View style={[styles.step, styles.stepDone]} />
             <View style={[styles.step, styles.stepDone]} />
@@ -78,9 +83,9 @@ export default function SummaryScreen() {
           </View>
         </View>
 
-        <Pressable style={styles.editButton} onPress={back}>
+        <Pressable style={styles.PressableIcon} onPress={back}>
           <MaterialIcons name="edit" size={18} color={COLORS.primary} />
-          <Text style={styles.editButtonText}>Modifier les ingrédients</Text>
+          <Text style={styles.PressableIconText}>Modifier les ingrédients</Text>
         </Pressable>
       </ScrollView>
 
@@ -225,7 +230,7 @@ const styles = StyleSheet.create({
     color: COLORS.textPrimary,
     fontWeight: '500',
   },
-  editButton: {
+  PressableIcon: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -234,7 +239,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: COLORS.primaryLight,
   },
-  editButtonText: {
+  PressableIconText: {
     fontSize: 14,
     fontWeight: '600',
     color: COLORS.primary,

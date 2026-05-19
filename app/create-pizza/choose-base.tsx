@@ -1,1 +1,1 @@
-export { default } from '@features/menu-editor/screens/ChooseBaseScreen';
+export { default } from '@features/pizzaEditor/screens/ChooseBaseScreen';

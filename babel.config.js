@@ -9,8 +9,10 @@ export default function (api) {
           root: ['./'],
           alias: {
             '@': './app',
-            // '@src': './src',
             '@features': './src/features',
+            '@ingredients': './src/features/ingredients',
+            '@pizzaEditor': './src/features/pizzaEditor',
+            '@components': './src/components',
             '@config': './src/config',
             '@types': './src/types',
             '@assets': './assets/index.ts',
