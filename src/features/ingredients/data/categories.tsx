@@ -1,12 +1,12 @@
-export const CATEGORY_META: Record<string, { emoji: string }> = {
-  Fromages: { emoji: '🧀' },
-  Viandes: { emoji: '🥩' },
-  Poissons: { emoji: '🐟' },
-  Légumes: { emoji: '🥦' },
-  Herbes: { emoji: '🌿' },
-  Autres: { emoji: '🫙' },
-};
+export const CATEGORIES = [
+  { label: 'Fromages', emoji: '🧀' },
+  { label: 'Viandes', emoji: '🥩' },
+  { label: 'Poissons', emoji: '🐟' },
+  { label: 'Légumes', emoji: '🥦' },
+  { label: 'Herbes', emoji: '🌿' },
+  { label: 'Autres', emoji: '🫙' },
+] as const;
 
-export const DEFAULT_META = { emoji: '🍴' };
+export type Category = (typeof CATEGORIES)[number];
 
-export const CATEGORY_ORDER = ['Fromages', 'Viandes', 'Poissons', 'Légumes', 'Herbes', 'Autres'];
+export const DEFAULT_CAT_EMOJI = '🍴' as const;

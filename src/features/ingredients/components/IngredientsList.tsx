@@ -5,7 +5,7 @@ import { COLORS, LAYOUT } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import IngredientRow from '@ingredients/components/IngredientRow';
 import { useIngredients } from '@ingredients/contexts/IngredientsContext';
-import { CATEGORY_META, DEFAULT_META } from '@ingredients/data/categories';
+import { CATEGORIES, DEFAULT_CAT_EMOJI } from '@ingredients/data/categories';
 import { Ingredient } from '@types';
 
 interface EmptyListProps {
@@ -36,7 +36,9 @@ const IngredientsList = ({ selectedCategory, openModal }: IngredientsListProps) 
 
   const [rowEditId, setRowEditId] = useState<string | null>(null);
   const [rowEditName, setRowEditName] = useState('');
-  const activeMeta = CATEGORY_META[selectedCategory] ?? DEFAULT_META;
+  const activeMeta = CATEGORIES.find(c => c.label === selectedCategory) ?? {
+    emoji: DEFAULT_CAT_EMOJI,
+  };
 
   const handleStartRowEdit = (ing: Ingredient) => {
     setRowEditId(ing.id);
