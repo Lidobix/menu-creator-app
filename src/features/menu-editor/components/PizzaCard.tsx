@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import EditButton from '@components/EditIcon';
 import { COLORS, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import type { Pizza } from '@types';
@@ -25,9 +26,13 @@ export const PizzaCard = memo(function PizzaCard({ pizza, onDelete, onEdit }: Pi
           </View>
         </View>
         <View style={styles.actions}>
-          <Pressable style={styles.actionButton} onPress={onEdit} hitSlop={8}>
-            <MaterialIcons name="edit" size={20} color={COLORS.textMuted} />
-          </Pressable>
+          <EditButton
+            onPress={onEdit}
+            hitSlop={8}
+            color={COLORS.textMuted}
+            containerStyle={styles.actionButton}
+            iconSize={20}></EditButton>
+
           <Pressable style={styles.actionButton} onPress={onDelete} hitSlop={8}>
             <MaterialIcons name="delete-outline" size={20} color={COLORS.textMuted} />
           </Pressable>

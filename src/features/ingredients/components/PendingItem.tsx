@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
+import EditButton from '@components/EditIcon';
 import { COLORS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ingredient } from '@types';
@@ -45,9 +46,12 @@ const PendingItem = memo(function PendingItem({
           <Text style={styles.pendingItemName} numberOfLines={1}>
             {item.name}
           </Text>
-          <Pressable style={styles.pendingAction} onPress={onStartEdit} hitSlop={6}>
-            <MaterialIcons name="edit" size={16} color={COLORS.textMuted} />
-          </Pressable>
+          <EditButton
+            containerStyle={styles.pendingAction}
+            onPress={onStartEdit}
+            hitSlop={6}
+            color={COLORS.textMuted}
+            iconSize={16}></EditButton>
         </>
       )}
       <Pressable style={styles.pendingAction} onPress={onDelete} hitSlop={6}>

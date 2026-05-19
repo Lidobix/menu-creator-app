@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { StyleSheet } from 'react-native';
+import EditButton from '@components/EditIcon';
 import { COLORS, LAYOUT } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Ingredient } from '@types';
@@ -48,9 +49,12 @@ const IngredientRow = memo(function IngredientRow({
       ) : (
         <>
           <Text style={styles.rowName}>{ingredient.name}</Text>
-          <Pressable style={styles.rowAction} onPress={onStartEdit} hitSlop={8}>
-            <MaterialIcons name="edit" size={18} color={COLORS.textMuted} />
-          </Pressable>
+          <EditButton
+            containerStyle={styles.rowAction}
+            onPress={onStartEdit}
+            iconSize={18}
+            hitSlop={8}
+            color={COLORS.textMuted}></EditButton>
           <Pressable style={styles.rowAction} onPress={onDelete} hitSlop={8}>
             <MaterialIcons name="delete-outline" size={18} color={COLORS.textMuted} />
           </Pressable>

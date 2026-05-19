@@ -6,6 +6,7 @@
       "@/*": ["./app/*"],
       // "@src/*": ["./src/*"],
       "@features/*": ["./src/features/*"],
+      "@components/*": ["./src/components/*"],
       "@types": ["./src/types/types.ts"],
       "@assets/*": ["./assets/*"],
       "@config": ["./src/config/index.ts"],

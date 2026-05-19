@@ -11,6 +11,7 @@ export default function (api) {
             '@': './app',
             // '@src': './src',
             '@features': './src/features',
+            '@components': './src/components',
             '@config': './src/config',
             '@types': './src/types',
             '@assets': './assets/index.ts',
