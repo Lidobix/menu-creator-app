@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { COLORS, SHADOWS } from '@config';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import type { Pizza } from '../types';
+import type { Pizza } from '@types';
 
 interface PizzaCardProps {
   pizza: Pizza;
